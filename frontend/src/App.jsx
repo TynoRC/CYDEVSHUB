@@ -1706,7 +1706,7 @@ function FloatingAIAssistant() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ex: vreau magazin online cu login și AI..."
+              placeholder="Ex: vreau un magazin online cu login și AI..."
               onKeyDown={(e) => {
                 if (e.key === "Enter") sendMessage();
               }}
