@@ -1,4 +1,4 @@
-const API_URL = "https://https://cydevshub-api.onrender.com/api";
+const API_URL = "https://cydevshub-api.onrender.com";
 
 export async function signupUser(name, email, password) {
   const response = await fetch(`${API_URL}/auth/signup`, {
