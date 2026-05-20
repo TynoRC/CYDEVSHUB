@@ -20,6 +20,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://cydevshubofficial-m3bq02tx9-tynorcs-projects.vercel.app",
+      "https://cydevshubofficial-tynorcs-projects.vercel.app",
     ],
     credentials: true,
   })
