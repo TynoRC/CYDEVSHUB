@@ -1,7 +1,4 @@
-const API_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5000/api"
-    : "https://https://cydevshub-api.onrender.com/api";
+const API_URL = "https://https://cydevshub-api.onrender.com/api";
 
 export async function signupUser(name, email, password) {
   const response = await fetch(`${API_URL}/auth/signup`, {
