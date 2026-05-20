@@ -402,18 +402,12 @@ function Orders({
   const [sent, setSent] = useState(false);
 
 useEffect(() => {
-  async function loadOrders() {
-    if (!token) return;
+  const savedOrders =
+    JSON.parse(localStorage.getItem("cydevsDemoOrders")) || [];
 
-    const data = await getMyOrders(token);
+  setOrders(savedOrders);
+}, []);
 
-    if (Array.isArray(data)) {
-      setOrders(data);
-    }
-  }
-
-  loadOrders();
-}, [token]);
   if (!user) {
     return (
       <section className="page">
@@ -467,14 +461,46 @@ Extra:
 - AI / automatizări: ${needsAI ? "DA" : "NU"}
 `;
 
-  const data = await createOrder(
-    {
-      title,
-      projectType: `${selectedPackage.name} — ${projectType}`,
-      description: fullDescription,
-    },
-    token
+async function handleOrder(e) {
+  e.preventDefault();
+
+  if (!selectedPackage) {
+    alert("Te rugăm să alegi mai întâi un pachet.");
+    setPage("packages");
+    return;
+  }
+
+  const title = e.target[0].value;
+  const projectType = e.target[1].value;
+  const urgency = e.target[2].value;
+  const description = e.target[3].value;
+
+  const newOrder = {
+    id: Date.now(),
+    title,
+    projectType: `${selectedPackage.name} — ${projectType}`,
+    description,
+    urgency,
+    status: "PENDING",
+    createdAt: new Date().toISOString(),
+  };
+
+  const savedOrders =
+    JSON.parse(localStorage.getItem("cydevsDemoOrders")) || [];
+
+  localStorage.setItem(
+    "cydevsDemoOrders",
+    JSON.stringify([newOrder, ...savedOrders])
   );
+
+  setOrders([newOrder, ...orders]);
+  setSent(true);
+  setSelectedPackage(null);
+
+  alert(
+    "Comanda a fost plasată cu succes. Vei fi contactat de echipa CYDEVS HUB."
+  );
+}
 
   if (!data.order) {
     alert(data.message || "Eroare la plasarea comenzii.");
