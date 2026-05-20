@@ -17,13 +17,17 @@ async function createOrder(req, res) {
       },
     });
 
-    await sendOrderConfirmationEmail(
-      order.user.email,
-      order.user.name,
-      order.title,
-      order.projectType,
-      order.description
-    );
+try {
+  await sendOrderConfirmationEmail(
+    order.user.email,
+    order.user.name,
+    order.title,
+    order.projectType,
+    order.description
+  );
+} catch (emailError) {
+  console.error("ORDER EMAIL ERROR:", emailError.message);
+}
 
     res.json({
       message: "Comandă plasată cu succes.",
