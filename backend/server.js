@@ -13,20 +13,18 @@ const feedbackRoutes = require("./routes/feedbackRoutes");
 
 const app = express();
 
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
-
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
-app.use("/api/developer", developerRoutes);
 app.use("/api/forum", forumRoutes);
 app.use("/api/feedback", feedbackRoutes);
 
