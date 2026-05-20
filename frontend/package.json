@@ -1,0 +1,16 @@
+{
+  "name": "cydevs-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.15.1"
+  },
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
+}
